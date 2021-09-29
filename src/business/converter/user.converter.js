@@ -1,6 +1,7 @@
 'use strict';
 const userConverter = (user) => {
 	return {
+		id: user.ID_USUARIO || user.P_ID_USUARIO, // ID_USUARIO
 		active: user.ACTIVO || user.P_ACTIVO.trim(), // ACTIVO
 		user_identification: {
 			number: user.RUT_USUARIO || user.P_RUT_USUARIO, // RUT_USUARIO

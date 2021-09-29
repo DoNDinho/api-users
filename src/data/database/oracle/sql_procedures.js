@@ -35,6 +35,7 @@ const getUserByEmail = (email) => {
 		statement: `BEGIN SP_LISTAR_USUARIO_POR_EMAIL(:P_EMAIL, :P_RUT_USUARIO, :P_DV_RUT, :P_NOMBRE, :P_APELLIDO_PAT, :P_APELLIDO_MAT, :P_FEC_NAC, :P_TELEFONO, :P_DIRECCION, :P_ACTIVO, :P_ID_EMPRESA, :P_NOMBRE_EMPRESA, :P_ID_CARGO, :P_DESCRIPCION_CARGO, :P_ID_ROL, :P_DESCRIPCION_ROL, :P_CODIGO, :P_MENSAJE); END;`,
 		bind: {
 			P_EMAIL: { val: email, type: oracledb.DB_TYPE_VARCHAR, dir: oracledb.BIND_INOUT },
+			P_ID_USUARIO: { type: oracledb.DB_TYPE_NUMBER, dir: oracledb.BIND_OUT },
 			P_RUT_USUARIO: { type: oracledb.DB_TYPE_VARCHAR, dir: oracledb.BIND_OUT },
 			P_DV_RUT: { type: oracledb.DB_TYPE_VARCHAR, dir: oracledb.BIND_OUT },
 			P_NOMBRE: { type: oracledb.DB_TYPE_VARCHAR, dir: oracledb.BIND_OUT },
