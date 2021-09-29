@@ -2,10 +2,10 @@
 const Runner = require('../database/oracle/runner/runner');
 const sqlProcedures = require('../database/oracle/sql_procedures');
 
-const insertCompany = async (company) => {
+const insertUser = async (data, encryptPassword) => {
 	try {
 		const database = new Runner();
-		const procedure = sqlProcedures.insertCompany(company);
+		const procedure = sqlProcedures.insertUser(data, encryptPassword);
 		const result = await database.runProcedure(procedure);
 		return result.outBinds;
 	} catch (error) {
@@ -46,4 +46,4 @@ const updateCompany = async (id, company) => {
 	}
 };
 
-module.exports = { getListUsers, getUserByEmail };
+module.exports = { getListUsers, getUserByEmail, insertUser };

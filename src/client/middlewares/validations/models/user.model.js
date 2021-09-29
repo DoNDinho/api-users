@@ -5,7 +5,7 @@ const userSchema = {
 		data: {
 			type: 'object',
 			properties: {
-				company_identification: {
+				user_identification: {
 					type: 'object',
 					properties: {
 						number: {
@@ -21,13 +21,19 @@ const userSchema = {
 					},
 					required: ['number', 'validator']
 				},
-				company_data: {
+				user_address: {
 					type: 'object',
 					properties: {
-						name: {
+						street: {
 							type: 'string',
 							minLength: 1
-						},
+						}
+					},
+					required: ['street']
+				},
+				user_contact: {
+					type: 'object',
+					properties: {
 						email: {
 							type: 'string',
 							minLength: 1
@@ -37,27 +43,88 @@ const userSchema = {
 							minimum: 8
 						}
 					},
-					required: ['name', 'email', 'phone']
+					required: ['email', 'phone']
 				},
-				company_address: {
+				user_info: {
 					type: 'object',
 					properties: {
-						city: {
+						name: {
 							type: 'string',
 							minLength: 1
 						},
-						street: {
+						paternal: {
+							type: 'string',
+							minLength: 1
+						},
+						maternal: {
+							type: 'string',
+							minLength: 1
+						},
+						birthdate: {
 							type: 'string',
 							minLength: 1
 						}
 					},
-					required: ['city', 'street']
+					required: ['name', 'paternal', 'maternal', 'birthdate']
+				},
+				user_credentials: {
+					type: 'object',
+					properties: {
+						password: {
+							type: 'string',
+							minLength: 1
+						},
+						role: {
+							type: 'object',
+							properties: {
+								code: {
+									type: 'integer',
+									minimum: 1
+								}
+							},
+							required: ['code']
+						}
+					},
+					required: ['password', 'role']
+				},
+				user_profesion: {
+					type: 'object',
+					properties: {
+						company: {
+							type: 'object',
+							properties: {
+								code: {
+									type: 'integer',
+									minimum: 1
+								}
+							},
+							required: ['code']
+						},
+						job: {
+							type: 'object',
+							properties: {
+								code: {
+									type: 'integer',
+									minimum: 1
+								}
+							},
+							required: ['code']
+						}
+					},
+					required: ['company', 'job']
 				}
 			},
-			required: ['company_identification', 'company_data', 'company_address']
+			required: [
+				'user_identification',
+				'user_address',
+				'user_contact',
+				'user_info',
+				'user_credentials',
+				'user_profesion'
+			]
 		}
 	},
 	required: ['data']
-}
+};
 
-module.exports = userSchema
+module.exports = userSchema;
