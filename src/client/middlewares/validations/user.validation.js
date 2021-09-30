@@ -19,7 +19,7 @@ userValidation.use((req, res, next) => {
 		logger.error(`Request invalido - ${validate.errors[0].message}`);
 		res.status(400).json({
 			code: '400',
-			message: validate.errors[0]
+			message: validate.errors[0].message
 		});
 	}
 });
