@@ -12,8 +12,9 @@ const insertUser = (user, password) => {
 
 	return {
 		name: 'SP_INSERTAR_USUARIO',
-		statement: `BEGIN SP_INSERTAR_USUARIO('${number}', '${validator}', '${codeCompany}', '${name}', '${paternal}', '${maternal}', '${birthdate}', '${email}', '${phone}', '${street}', '${codeJob}', '${password}', '${codeRole}', :P_CODIGO,:P_MENSAJE); END;`,
+		statement: `BEGIN SP_INSERTAR_USUARIO('${number}', '${validator}', '${codeCompany}', '${name}', '${paternal}', '${maternal}', :P_FEC_NAC, '${email}', '${phone}', '${street}', '${codeJob}', '${password}', '${codeRole}', :P_CODIGO,:P_MENSAJE); END;`,
 		bind: {
+			P_FEC_NAC: { val: birthdate, dir: oracledb.BIND_IN },
 			P_CODIGO: { dir: oracledb.BIND_OUT },
 			P_MENSAJE: { dir: oracledb.BIND_OUT }
 		}
