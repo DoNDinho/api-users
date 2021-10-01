@@ -11,6 +11,7 @@ const bodyParser = require('body-parser');
 global.logger = require('./business/utils/configs/log4js.config');
 const userRoutes = require('./client/routes/user.routes');
 const healthRoute = require('./client/routes/health');
+const rolesRoutes = require('./client/routes/roles.routes');
 const { errorHandler } = require('./client/middlewares/error-handler/error-handler');
 const port = process.env.PORT;
 
@@ -26,6 +27,7 @@ app.use(bodyParser.json());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(healthRoute);
 app.use(userRoutes);
+app.use(rolesRoutes);
 app.use(async (err, req, res, next) => {
 	await errorHandler(err, res);
 });
