@@ -25,7 +25,7 @@ class OracleRunner extends RunnerStrategy {
 			return result;
 		} catch (error) {
 			logger.error(error);
-			throw { httpCode: 503, code: error.errorNum.toString(), message: error.message };
+			throw { httpCode: 500, code: error.errorNum.toString(), message: error.message };
 		}
 	}
 
@@ -57,7 +57,7 @@ class OracleRunner extends RunnerStrategy {
 			return arrayResult;
 		} catch (error) {
 			logger.error(error);
-			throw { httpCode: 503, code: error.errorNum.toString(), message: 'Servicio no disponible' };
+			throw { httpCode: 500, code: error.errorNum.toString(), message: error.message };
 		}
 	}
 }
