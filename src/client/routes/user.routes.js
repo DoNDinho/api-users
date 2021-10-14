@@ -29,12 +29,11 @@ router.post(
 
 router.get(`${basePath}/v1/users`, [authMiddleware, headersValidation], async (req, res, next) => {
 	try {
-		// TODO Colocar funcion de traceRequest
 		const transactionId = req.headers['transaction-id'];
 		logger.addContext('transaction_id', transactionId);
-		const response = await listUsersService.execute();
+		const response = await listUsersService.getListUsers(req);
 		logger.info(JSON.stringify({ message: 'Lista de usuarios obtenidas', data: response }));
-		res.json({ data: response });
+		res.json({ data: { users: response } });
 	} catch (error) {
 		next(error);
 	}

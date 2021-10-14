@@ -12,7 +12,7 @@ router.get(`${basePath}/v1/jobs`, [authMiddleware, headersValidation], async (re
 		logger.addContext('transaction_id', transactionId);
 		const response = await listJobsService.getListJobs();
 		logger.info(JSON.stringify({ message: 'Lista de cargos obtenidos', data: response }));
-		res.json({ data: response });
+		res.json({ data: { jobs: response } });
 	} catch (error) {
 		next(error);
 	}

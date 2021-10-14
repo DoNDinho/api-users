@@ -2,23 +2,20 @@
 const userConverter = (user) => {
 	return {
 		id: user.ID_USUARIO || user.P_ID_USUARIO, // ID_USUARIO
-		active: user.ACTIVO || user.P_ACTIVO.trim(), // ACTIVO
+		active: user.ACTIVO == '1' ? true : false || user.P_ACTIVO.trim() == '1' ? true : false, // ACTIVO
 		user_identification: {
-			number: user.RUT_USUARIO || user.P_RUT_USUARIO, // RUT_USUARIO
-			validator: user.DV_RUT || user.P_DV_RUT.trim() // DV_RUT
-		},
-		user_address: {
-			street: user.DIRECCION || user.P_DIRECCION // DIRECCION
+			number: user.RUT || user.P_RUT, // RUT
+			validator: user.DV || user.P_DV.trim() // DV
 		},
 		user_contact: {
 			email: user.EMAIL || user.P_EMAIL, // EMAIL
 			phone: user.TELEFONO || user.P_TELEFONO // TELEFONO
 		},
 		user_info: {
-			name: user.NOMBRE || user.P_NOMBRE, // NOMBRE
-			paternal: user.APELLIDO_PAT || user.P_APELLIDO_PAT, // APELLIDO_PAT
-			maternal: user.APELLIDO_MAT || user.P_APELLIDO_MAT, // APELLIDO_MAT
-			birthdate: user.FEC_NAC || user.P_FEC_NAC // FEC_NAC
+			names: user.NOMBRES || user.P_NOMBRES, // NOMBRES
+			paternal: user.APATERNO || user.P_APATERNO, // APATERNO
+			maternal: user.AMATERNO || user.P_AMATERNO, // AMATERNO
+			birthdate: user.FECHANACIMIENTO || user.P_FECHANACIMIENTO // FECHANACIMIENTO
 		},
 		user_credentials: {
 			role: {
@@ -34,7 +31,8 @@ const userConverter = (user) => {
 			job: {
 				code: user.ID_CARGO || user.P_ID_CARGO, // ID_CARGO
 				description: user.DESCRIPCION_CARGO || user.P_DESCRIPCION_CARGO // opcional?
-			}
+			},
+			contract_start_date: user.INICIO_CONTRATO || user.P_INICIO_CONTRATO // INICIO CONTRATO
 		}
 	};
 };

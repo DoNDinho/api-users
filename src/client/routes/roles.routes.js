@@ -12,7 +12,7 @@ router.get(`${basePath}/v1/roles`, [authMiddleware, headersValidation], async (r
 		logger.addContext('transaction_id', transactionId);
 		const response = await listRolesService.getListRoles();
 		logger.info(JSON.stringify({ message: 'Lista de roles de usuario obtenidos', data: response }));
-		res.json({ data: response });
+		res.json({ data: { roles: response } });
 	} catch (error) {
 		next(error);
 	}

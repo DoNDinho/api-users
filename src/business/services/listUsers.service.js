@@ -2,16 +2,21 @@
 const usersRepository = require('../../data/repository/users.repository');
 const userConverter = require('../converter/user.converter');
 
-const execute = async () => {
+const getListUsers = async (req) => {
 	try {
-		const listUsers = await getListUsers();
+		let listUsers = await execute();
+
+		if (req.query.id_rol) {
+			listUsers = await filterUsersByRol(parseInt(req.query.id_rol), listUsers);
+		}
+
 		return await Promise.all(listUsers.map((user) => userConverter.userConverter(user)));
 	} catch (error) {
 		throw error;
 	}
 };
 
-const getListUsers = async () => {
+const execute = async () => {
 	try {
 		const result = await usersRepository.getListUsers();
 		logger.info('RESULT ', result);
@@ -22,4 +27,8 @@ const getListUsers = async () => {
 	}
 };
 
-module.exports = { execute };
+const filterUsersByRol = async (id_rol, listUsers) => {
+	return await listUsers.filter((user) => user.ID_ROL == id_rol);
+};
+
+module.exports = { getListUsers };
