@@ -9,7 +9,6 @@ class OracleRunner extends RunnerStrategy {
 
 	async runProcedure(procedure) {
 		try {
-			// TODO Validar donde colocar conexion a base de datos
 			const connection = await oracledb.getConnection({
 				user: process.env.ORACLE_DB_USER,
 				password: process.env.ORACLE_DB_PASSWORD,

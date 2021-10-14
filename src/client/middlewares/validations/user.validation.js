@@ -11,7 +11,6 @@ userValidation.use((req, res, next) => {
 	const valid = validate(data);
 
 	logger.info('Validando request de la solicitud');
-	// TODO modificar esta condicional
 	if (valid) {
 		logger.info('Request valido');
 		next();

@@ -2,10 +2,10 @@
 const Runner = require('../database/oracle/runner/runner');
 const sqlProcedures = require('../database/oracle/sql_procedures');
 
-const insertUser = async (data, encryptPassword) => {
+const insertUser = async (user, encryptPassword) => {
 	try {
 		const database = new Runner();
-		const procedure = sqlProcedures.insertUser(data, encryptPassword);
+		const procedure = sqlProcedures.insertUser(user, encryptPassword);
 		const result = await database.runProcedure(procedure);
 		return result.outBinds;
 	} catch (error) {

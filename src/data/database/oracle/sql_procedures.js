@@ -3,16 +3,23 @@ const oracledb = require('oracledb');
 
 const insertUser = (user, password) => {
 	const { number, validator } = user.user_identification;
-	const { street } = user.user_address;
 	const { email, phone } = user.user_contact;
-	const { name, paternal, maternal, birthdate } = user.user_info;
+	const { names, paternal, maternal, birthdate } = user.user_info;
 	const codeRole = user.user_credentials.role.code;
-	const codeCompany = user.user_profesion.company.code;
 	const codeJob = user.user_profesion.job.code;
+	let codeCompany = null;
+	let contractStartDate = null;
+
+	if (user.user_profesion.hasOwnProperty('company')) {
+		codeCompany = user.user_profesion.company.code || null;
+	}
+	if (user.user_profesion.contract_start_date) {
+		contractStartDate = user.user_profesion.contract_start_date;
+	}
 
 	return {
 		name: 'SP_INSERTAR_USUARIO',
-		statement: `BEGIN SP_INSERTAR_USUARIO('${number}', '${validator}', '${codeCompany}', '${name}', '${paternal}', '${maternal}', '${birthdate}', '${email}', '${phone}', '${street}', '${codeJob}', '${password}', '${codeRole}', :P_CODIGO,:P_MENSAJE); END;`,
+		statement: `BEGIN SP_INSERTAR_USUARIO('${number}', '${validator}', '${names}', '${paternal}', '${maternal}', '${birthdate}', '${email}', ${phone}, '${password}', ${codeJob}, ${codeRole}, '${contractStartDate}', ${codeCompany}, :P_CODIGO,:P_MENSAJE); END;`,
 		bind: {
 			P_CODIGO: { dir: oracledb.BIND_OUT },
 			P_MENSAJE: { dir: oracledb.BIND_OUT }
