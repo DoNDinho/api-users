@@ -7,7 +7,7 @@ const getListUsers = async (req) => {
 		let listUsers = await execute();
 
 		if (req.query.id_rol) {
-			listUsers = await filterUsersByRol(parseInt(req.query.id_rol), listUsers);
+			listUsers = await filterUsersByRol(req.query.id_rol, listUsers);
 		}
 
 		return await Promise.all(listUsers.map((user) => userConverter.userConverter(user)));
