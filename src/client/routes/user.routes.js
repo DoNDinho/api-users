@@ -47,7 +47,7 @@ router.get(
 			logger.addContext('transaction_id', transactionId);
 			const response = await getUserService.execute(req.params.email);
 			logger.info(JSON.stringify({ message: 'Usuario obtenido', data: response }));
-			res.json({ data: response });
+			res.json({ data: { user: response } });
 		} catch (error) {
 			next(error);
 		}
