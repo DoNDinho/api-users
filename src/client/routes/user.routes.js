@@ -2,7 +2,7 @@ const express = require('express');
 const insertUserService = require('../../business/services/insertUser.service');
 const listUsersService = require('../../business/services/listUsers.service');
 const getUserService = require('../../business/services/getUser.service');
-const updateCompanyService = require('../../business/services/updateCompany.service');
+const updateUserService = require('../../business/services/updateUser.service');
 
 const router = express.Router();
 const { basePath } = require('../../business/utils/configs/api.config');
@@ -54,21 +54,21 @@ router.get(
 	}
 );
 
-// TODO Se debe modificar esta ruta
-// router.put(
-// 	`${basePath}/v1/companies/:id`,
-// 	[authMiddleware, headersValidation, userValidation],
-// 	async (req, res, next) => {
-// 		try {
-// 			const transactionId = req.headers['transaction-id']
-// 			logger.addContext('transaction_id', transactionId)
-// 			const response = await updateCompanyService.execute(req.params.id, req.body.data)
-// 			logger.info(JSON.stringify({ message: 'Empresa actualizada', data: response }))
-// 			res.json({ data: response })
-// 		} catch (error) {
-// 			next(error)
-// 		}
-// 	}
-// )
+router.put(
+	`${basePath}/v1/users/:email`,
+	[authMiddleware, headersValidation, userValidation],
+	async (req, res, next) => {
+		try {
+			const transactionId = req.headers['transaction-id'];
+			logger.addContext('transaction_id', transactionId);
+
+			const response = await updateUserService.updateUser(req.params.email, req.body.data.user);
+			logger.info(JSON.stringify({ message: 'Usuario actualizado', data: response }));
+			res.json({ data: { user: response } });
+		} catch (error) {
+			next(error);
+		}
+	}
+);
 
 module.exports = router;

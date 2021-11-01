@@ -1,4 +1,6 @@
 'use strict';
+const { formatDate } = require('../utils/date');
+
 const userConverter = (user) => {
 	return {
 		id: user.ID_USUARIO || user.P_ID_USUARIO,
@@ -15,7 +17,7 @@ const userConverter = (user) => {
 			names: user.NOMBRES || user.P_NOMBRES,
 			paternal: user.APATERNO || user.P_APATERNO,
 			maternal: user.AMATERNO || user.P_AMATERNO,
-			birthdate: user.FECHANACIMIENTO || user.P_FECHANACIMIENTO
+			birthdate: formatDate(user.FECHANACIMIENTO) || formatDate(user.P_FECHANACIMIENTO)
 		},
 		user_credentials: {
 			role: {
@@ -32,7 +34,7 @@ const userConverter = (user) => {
 				code: user.ID_CARGO || user.P_ID_CARGO,
 				description: user.DESCRIPCION_CARGO || user.P_DESCRIPCION_CARGO
 			},
-			contract_start_date: user.INICIO_CONTRATO || user.P_INICIO_CONTRATO
+			contract_start_date: formatDate(user.INICIO_CONTRATO) || formatDate(user.P_INICIO_CONTRATO)
 		}
 	};
 };

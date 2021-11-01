@@ -35,10 +35,10 @@ const getUserByEmail = async (email) => {
 	}
 };
 
-const updateCompany = async (id, company) => {
+const updateUser = async (emailParam, user, password, active) => {
 	try {
 		const database = new Runner();
-		const procedure = sqlProcedures.updateCompany(id, company);
+		const procedure = sqlProcedures.updateUser(emailParam, user, password, active);
 		const result = await database.runProcedure(procedure);
 		return result.outBinds;
 	} catch (error) {
@@ -46,4 +46,4 @@ const updateCompany = async (id, company) => {
 	}
 };
 
-module.exports = { getListUsers, getUserByEmail, insertUser };
+module.exports = { getListUsers, getUserByEmail, insertUser, updateUser };
