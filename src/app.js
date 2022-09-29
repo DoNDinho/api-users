@@ -8,7 +8,7 @@ const healthRoute = require('./client/routes/health')
 const rolesRoutes = require('./client/routes/roles.routes')
 const usersRoutes = require('./client/routes/users.routes')
 const { errorHandler } = require('./client/middlewares/error-handler/error-handler')
-const { authorizate } = require('./client/middlewares/authorizations/authorizations')
+// const { authorizate } = require('./client/middlewares/authorizations/authorizations')
 const port = process.env.PORT
 
 const app = express()
@@ -17,7 +17,7 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-app.use(authorizate)
+// app.use(authorizate)
 
 // Configurando rutas
 app.use(healthRoute)
