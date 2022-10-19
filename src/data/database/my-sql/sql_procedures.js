@@ -105,6 +105,14 @@ const deleteReservation = (id) => {
   }
 }
 
+const listReservations = (email) => {
+  return {
+    name: 'SP_LISTAR_RESERVAS_CLIENTE',
+    statements: [`CALL SP_LISTAR_RESERVAS_CLIENTE("${email}");`],
+    values: []
+  }
+}
+
 module.exports = {
   listRoles,
   insertUser,
@@ -114,5 +122,6 @@ module.exports = {
   updateUser,
   updatePassword,
   insertReservation,
-  deleteReservation
+  deleteReservation,
+  listReservations
 }

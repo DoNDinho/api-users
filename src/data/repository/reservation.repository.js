@@ -29,4 +29,17 @@ const deleteReservation = async (id) => {
   }
 }
 
-module.exports = { insertReservation, deleteReservation }
+const listReservations = async (email) => {
+  try {
+    const mySqlClient = await MySqlClient.getInstance()
+    const procedure = sqlProcedures.listReservations(email)
+    const sqlRunner = new MySqlRunner(mySqlClient)
+    const result = await sqlRunner.runProcedure(procedure)
+    console.log(JSON.stringify(result))
+    return result.pop()[0]
+  } catch (error) {
+    throw error
+  }
+}
+
+module.exports = { insertReservation, deleteReservation, listReservations }
