@@ -7,6 +7,7 @@ global.logger = require('./business/utils/configs/log4js.config')
 const healthRoute = require('./client/routes/health')
 const rolesRoutes = require('./client/routes/roles.routes')
 const usersRoutes = require('./client/routes/users.routes')
+const reservationRoutes = require('./client/routes/reservation.routes')
 const { errorHandler } = require('./client/middlewares/error-handler/error-handler')
 const port = process.env.PORT
 
@@ -21,12 +22,13 @@ app.use(bodyParser.json())
 app.use(healthRoute)
 app.use(rolesRoutes)
 app.use(usersRoutes)
+app.use(reservationRoutes)
 
 app.use(async (err, req, res, next) => {
-	await errorHandler(err, res)
+  await errorHandler(err, res)
 })
 
 // Iniciando servidor
 app.listen(port, () => {
-	logger.info('Servidor en puerto', port)
+  logger.info('Servidor en puerto', port)
 })
